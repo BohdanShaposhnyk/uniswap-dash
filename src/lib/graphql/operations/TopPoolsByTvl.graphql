@@ -1,0 +1,16 @@
+query TopPoolsByTvl($first: Int!) {
+  pools(
+    first: $first
+    orderBy: totalValueLockedUSD
+    orderDirection: desc
+  ) {
+    id
+    totalValueLockedUSD
+    token0 {
+      symbol
+    }
+    token1 {
+      symbol
+    }
+  }
+}
