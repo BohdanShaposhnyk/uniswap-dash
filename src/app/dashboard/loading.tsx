@@ -17,9 +17,15 @@ export default function DashboardLoading() {
     <main className="container max-w-2xl mx-auto py-8 px-4">
       <Skeleton className="h-8 w-48 mb-6" />
       <ul className="flex flex-col gap-3 list-none p-0 m-0">
-        <li><SkeletonRow /></li>
-        <li><SkeletonRow /></li>
-        <li><SkeletonRow /></li>
+        <li>
+          <SkeletonRow />
+        </li>
+        <li>
+          <SkeletonRow />
+        </li>
+        <li>
+          <SkeletonRow />
+        </li>
       </ul>
     </main>
   );

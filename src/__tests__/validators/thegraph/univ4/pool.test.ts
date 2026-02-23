@@ -2,7 +2,7 @@ import { describe, it, expect } from "vitest";
 import {
   parseTopPoolsResponse,
   TopPoolsResponseSchema,
-} from "@/lib/validators/pool";
+} from "@/lib/graphql/validators/pool";
 
 const validResponse = {
   data: {

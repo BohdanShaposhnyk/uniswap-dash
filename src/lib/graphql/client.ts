@@ -1,11 +1,5 @@
 import { print } from "graphql";
 import type { TypedDocumentNode } from "@graphql-typed-document-node/core";
-import {
-  TopPoolsByTvlDocument,
-  type TopPoolsByTvlQuery,
-  type TopPoolsByTvlQueryVariables,
-} from "@/lib/graphql/generated";
-import type { Pool } from "@/lib/validators/pool";
 
 type GqlFetchOptions = {
   next?: { revalidate?: number };
