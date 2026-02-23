@@ -1,28 +1,32 @@
 import { describe, it, expect } from "vitest";
 import { render, screen } from "@testing-library/react";
 import { PoolList } from "@/app/dashboard/_components/PoolList";
-import type { Pool } from "@/lib/validators/pool";
+import type { MidgardPoolWithTvl } from "@/lib/rest/public/thorchain/midgard/queries/pools/schema";
 
-const mockPools: Pool[] = [
+const mockPools: MidgardPoolWithTvl[] = [
   {
-    id: "0x1",
-    totalValueLockedUSD: "1000000",
-    token0: { symbol: "ETH" },
-    token1: { symbol: "USDC" },
+    asset: "BTC.BTC",
+    assetDepth: "100000000000",
+    runeDepth: "5000000000000",
+    assetPriceUSD: "50000",
+    status: "available",
+    tvlUsd: 1_000_000,
   },
   {
-    id: "0x2",
-    totalValueLockedUSD: "500000",
-    token0: { symbol: "WETH" },
-    token1: { symbol: "USDT" },
+    asset: "ETH.ETH",
+    assetDepth: "50000000000",
+    runeDepth: "2000000000000",
+    assetPriceUSD: "3000",
+    status: "available",
+    tvlUsd: 500_000,
   },
 ];
 
 describe("PoolList", () => {
-  it("renders token symbol and TVL for each pool", () => {
+  it("renders asset and TVL for each pool", () => {
     render(<PoolList pools={mockPools} />);
-    expect(screen.getByText("ETH / USDC")).toBeInTheDocument();
-    expect(screen.getByText("WETH / USDT")).toBeInTheDocument();
+    expect(screen.getByText("BTC.BTC")).toBeInTheDocument();
+    expect(screen.getByText("ETH.ETH")).toBeInTheDocument();
     expect(screen.getByText("$1,000,000")).toBeInTheDocument();
     expect(screen.getByText("$500,000")).toBeInTheDocument();
   });
@@ -31,8 +35,8 @@ describe("PoolList", () => {
     render(<PoolList pools={mockPools} />);
     const items = screen.getAllByRole("listitem");
     expect(items).toHaveLength(2);
-    expect(items[0]).toHaveTextContent("ETH / USDC");
-    expect(items[1]).toHaveTextContent("WETH / USDT");
+    expect(items[0]).toHaveTextContent("BTC.BTC");
+    expect(items[1]).toHaveTextContent("ETH.ETH");
   });
 
   it("shows No pools when empty", () => {

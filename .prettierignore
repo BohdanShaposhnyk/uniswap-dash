@@ -1,0 +1,9 @@
+.next/
+out/
+build/
+node_modules/
+*.min.js
+src/lib/graphql/generated.ts
+package-lock.json
+pnpm-lock.yaml
+yarn.lock

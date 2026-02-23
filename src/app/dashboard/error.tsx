@@ -18,10 +18,10 @@ export default function DashboardError({
     <main className="container max-w-2xl mx-auto py-8 px-4">
       <Card>
         <CardContent className="py-6">
-          <p className="text-destructive font-medium mb-2">Something went wrong</p>
-          <p className="text-muted-foreground text-sm mb-4">
-            {error.message}
+          <p className="text-destructive font-medium mb-2">
+            Something went wrong
           </p>
+          <p className="text-muted-foreground text-sm mb-4">{error.message}</p>
           <button
             type="button"
             onClick={reset}
