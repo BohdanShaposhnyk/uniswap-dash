@@ -1,5 +1,5 @@
-import { print } from "graphql";
-import type { TypedDocumentNode } from "@graphql-typed-document-node/core";
+import { print } from 'graphql';
+import type { TypedDocumentNode } from '@graphql-typed-document-node/core';
 
 type GqlFetchOptions = {
   next?: { revalidate?: number };
@@ -11,7 +11,7 @@ function getSubgraphUrl(): string {
   const key = process.env.THEGRAPH_API_KEY;
   if (!base || !id || !key) {
     throw new Error(
-      "Missing The Graph env: THEGRAPH_API_BASE_URL, SUBGRAPH_ID_UNISWAP_V4, THEGRAPH_API_KEY"
+      'Missing The Graph env: THEGRAPH_API_BASE_URL, SUBGRAPH_ID_UNISWAP_V4, THEGRAPH_API_KEY',
     );
   }
   return `${base}/subgraphs/id/${id}`;
@@ -20,14 +20,14 @@ function getSubgraphUrl(): string {
 export async function gqlFetch<TData, TVars extends Record<string, unknown>>(
   document: TypedDocumentNode<TData, TVars>,
   variables: TVars,
-  options?: GqlFetchOptions
+  options?: GqlFetchOptions,
 ): Promise<TData> {
   const url = getSubgraphUrl();
   const apiKey = process.env.THEGRAPH_API_KEY!;
   const res = await fetch(url, {
-    method: "POST",
+    method: 'POST',
     headers: {
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
       Authorization: `Bearer ${apiKey}`,
     },
     body: JSON.stringify({
@@ -47,12 +47,12 @@ export async function gqlFetch<TData, TVars extends Record<string, unknown>>(
   };
 
   if (json.errors?.length) {
-    const messages = json.errors.map((e) => e.message).join("; ");
+    const messages = json.errors.map((e) => e.message).join('; ');
     throw new Error(`GraphQL errors: ${messages}`);
   }
 
   if (json.data === undefined) {
-    throw new Error("Subgraph returned no data");
+    throw new Error('Subgraph returned no data');
   }
 
   return json.data;

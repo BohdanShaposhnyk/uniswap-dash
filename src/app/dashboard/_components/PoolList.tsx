@@ -1,17 +1,16 @@
-import type { MidgardPool } from "@/lib/rest/public/thorchain/midgard/queries/pools/schema";
-import { PoolRow } from "./PoolRow";
+import { Grid } from '@/components/ui/grid';
+import type { MidgardPool } from '@/lib/rest/public/thorchain/midgard/queries/pools/schema';
+import { PoolCard } from './PoolCard';
 
 export function PoolList({ pools }: { pools: MidgardPool[] }) {
   if (pools.length === 0) {
-    return <p className="text-muted-foreground text-center py-8">No pools</p>;
+    return <p className="text-muted-foreground py-8 text-center">No pools</p>;
   }
   return (
-    <ul className="flex flex-col gap-3 list-none p-0 m-0">
+    <Grid>
       {pools.map((pool) => (
-        <li key={`${pool.asset}-${pool.chain}`}>
-          <PoolRow pool={pool} />
-        </li>
+        <PoolCard key={`${pool.asset}-${pool.chain}`} pool={pool} />
       ))}
-    </ul>
+    </Grid>
   );
 }
