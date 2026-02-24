@@ -1,15 +1,19 @@
-import { get } from "../../client";
+import { sortBy } from '@/lib/utils/arrays';
+import { get } from '../../client';
 import {
   PoolsResponseSchema,
+  type MidgradPoolRaw,
   type MidgardPool,
-} from "@/lib/rest/public/thorchain/midgard/queries/pools/schema";
+  type GetPoolsQueryParams,
+} from './schema';
 
-const E8 = 1e8;
+export async function getPools(params?: GetPoolsQueryParams): Promise<MidgardPool[]> {
+  const raw = await get<MidgradPoolRaw[]>('pools', params?.apiParams);
 
-export async function getPools(params?: {
-  status?: string;
-  period?: string;
-}): Promise<MidgardPool[]> {
-  const raw = await get<unknown>("pools", params);
-  return PoolsResponseSchema.parse(raw);
+  const pools = PoolsResponseSchema.parse(raw);
+
+  if (params?.transform && params.transform.sortBy && params.transform.sortDir) {
+    return sortBy<MidgardPool>(params.transform.sortBy, params.transform.sortDir)(pools);
+  }
+  return pools;
 }

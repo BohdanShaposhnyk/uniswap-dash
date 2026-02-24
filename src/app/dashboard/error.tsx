@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import { useEffect } from "react";
-import { Card, CardContent } from "@/components/ui/card";
+import { useEffect } from 'react';
+import { Card, CardContent } from '@/components/ui/card';
 
 export default function DashboardError({
   error,
@@ -11,16 +11,14 @@ export default function DashboardError({
   reset: () => void;
 }) {
   useEffect(() => {
-    console.error("Dashboard error:", error);
+    console.error('Dashboard error:', error);
   }, [error]);
 
   return (
     <main className="container max-w-2xl mx-auto py-8 px-4">
       <Card>
         <CardContent className="py-6">
-          <p className="text-destructive font-medium mb-2">
-            Something went wrong
-          </p>
+          <p className="text-destructive font-medium mb-2">Something went wrong</p>
           <p className="text-muted-foreground text-sm mb-4">{error.message}</p>
           <button
             type="button"
