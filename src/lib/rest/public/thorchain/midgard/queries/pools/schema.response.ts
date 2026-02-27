@@ -45,27 +45,4 @@ const PoolsResponseSchema = z.array(MidgardPoolSchema);
 
 type MidgardPool = z.infer<typeof MidgardPoolSchema>;
 
-const GetPoolsQueryParamsSchema = z.object({
-  apiParams: z
-    .object({
-      status: z.string().optional(),
-      period: z.string().optional(),
-    })
-    .optional(),
-  transform: z
-    .object({
-      sortBy: z.enum(['asset', 'chain', 'volume24hRaw']).optional(),
-      sortDir: z.enum(['asc', 'desc']).optional(),
-    })
-    .optional(),
-});
-
-type GetPoolsQueryParams = z.infer<typeof GetPoolsQueryParamsSchema>;
-
-export {
-  MidgardPoolSchema,
-  PoolsResponseSchema,
-  type MidgardPool,
-  type MidgradPoolRaw,
-  type GetPoolsQueryParams,
-};
+export { MidgardPoolSchema, PoolsResponseSchema, type MidgardPool, type MidgradPoolRaw };

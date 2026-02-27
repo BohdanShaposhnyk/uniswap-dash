@@ -1,37 +1,32 @@
-import { Card, CardDescription, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
-import { Grid } from '@/components/ui/grid';
 import { Skeleton } from '@/components/ui/skeleton';
 
-function SkeletonCard() {
+function SkeletonRow() {
   return (
-    <Card className="flex flex-col gap-4 py-4 aspect-square min-h-0">
-      <CardHeader className="px-4 pb-0">
-        <CardTitle className="text-base leading-tight">
-          <Skeleton className="h-5 w-3/4" />
-        </CardTitle>
-      </CardHeader>
-      <CardDescription className="px-4">
-        <Skeleton className="h-4 w-20" />
-      </CardDescription>
-      <CardContent className="px-4">
-        <Skeleton className="h-4 w-20" />
-      </CardContent>
-    </Card>
+    <div className="flex items-center justify-between gap-4 py-3 px-2">
+      <Skeleton className="h-4 w-32" />
+      <Skeleton className="h-4 w-20" />
+      <Skeleton className="h-4 w-24" />
+    </div>
   );
 }
 
 export default function DashboardLoading() {
   return (
-    <main className="container mx-auto max-w-2xl px-4 py-8">
-      <Skeleton className="mb-6 h-8 w-48" />
-      <Grid>
-        <SkeletonCard />
-        <SkeletonCard />
-        <SkeletonCard />
-        <SkeletonCard />
-        <SkeletonCard />
-        <SkeletonCard />
-      </Grid>
+    <main className="container mx-auto py-8 px-4">
+      <div className="grid grid-cols-2 gap-6">
+        <div>
+          <Skeleton className="mb-6 h-8 w-48" />
+          <div className="divide-y divide-border rounded-md border border-border">
+            <SkeletonRow />
+            <SkeletonRow />
+            <SkeletonRow />
+            <SkeletonRow />
+            <SkeletonRow />
+            <SkeletonRow />
+          </div>
+        </div>
+        <div className="min-h-[200px]" />
+      </div>
     </main>
   );
 }

@@ -4,14 +4,11 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils/styles';
 
-const navLink =
-  "text-sm font-medium transition-colors";
+const navLink = 'text-sm font-medium transition-colors';
 
-const navLinkInactive =
-  "text-muted-foreground hover:text-foreground";
+const navLinkInactive = 'text-muted-foreground hover:text-foreground';
 
-const navLinkActive =
-  "text-foreground font-semibold";
+const navLinkActive = 'text-foreground font-semibold';
 
 const NAV_ITEMS = [
   { href: '/', label: 'Home' },
@@ -33,10 +30,7 @@ export function Navbar() {
             <Link
               key={href}
               href={href}
-              className={cn(
-                navLink,
-                isActive ? navLinkActive : navLinkInactive,
-              )}
+              className={cn(navLink, isActive ? navLinkActive : navLinkInactive)}
               aria-current={isActive ? 'page' : undefined}
             >
               {label}
