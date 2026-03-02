@@ -1,6 +1,6 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { render, screen } from '@testing-library/react';
-import { PoolList } from '@/pages/dashboard/list/components/PoolList';
+import { PoolList } from '@/features/dashboard/list/components/PoolList';
 import type { MidgardPool } from '@/lib/rest/public/thorchain/midgard/queries/pools/schema.response';
 
 const mockGet = vi.fn();
