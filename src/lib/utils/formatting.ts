@@ -24,3 +24,12 @@ export const formatPercentage = (
     style: 'percent',
     ...options,
   }).format(value);
+
+export const formatTimestamp = (
+  timestamp: Date,
+  options?: Intl.DateTimeFormatOptions,
+  locale = 'en-US',
+) =>
+  new Intl.DateTimeFormat(locale, {
+    ...options,
+  }).format(timestamp);
