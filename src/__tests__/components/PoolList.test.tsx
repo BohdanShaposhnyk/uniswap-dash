@@ -1,7 +1,14 @@
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { render, screen } from '@testing-library/react';
-import { PoolList } from '@/app/dashboard/_components/PoolList';
+import { PoolList } from '@/pages/dashboard/list/components/PoolList';
 import type { MidgardPool } from '@/lib/rest/public/thorchain/midgard/queries/pools/schema.response';
+
+const mockGet = vi.fn();
+vi.mock('next/navigation', () => ({
+  useSearchParams: () => ({
+    get: mockGet,
+  }),
+}));
 
 const mockPools: MidgardPool[] = [
   {
@@ -31,6 +38,10 @@ const mockPools: MidgardPool[] = [
 ];
 
 describe('PoolList', () => {
+  beforeEach(() => {
+    mockGet.mockReturnValue(null);
+  });
+
   it('renders asset, price and volume for each pool', () => {
     render(<PoolList pools={mockPools} />);
     expect(screen.getByText('BTC')).toBeInTheDocument();
@@ -39,6 +50,24 @@ describe('PoolList', () => {
     expect(screen.getByText(/3,000\.00/)).toBeInTheDocument();
     expect(screen.getByText(/1\.2M/)).toBeInTheDocument();
     expect(screen.getByText(/500K/)).toBeInTheDocument();
+  });
+
+  it('renders links with ?selected= assetRaw for each pool', () => {
+    render(<PoolList pools={mockPools} />);
+    const btcLink = screen.getByRole('link', { name: /BTC/ });
+    const ethLink = screen.getByRole('link', { name: /ETH/ });
+    expect(btcLink).toHaveAttribute('href', '/dashboard?selected=BTC.BTC');
+    expect(ethLink).toHaveAttribute('href', '/dashboard?selected=ETH.ETH');
+  });
+
+  it('highlights selected pool when searchParams.selected matches assetRaw', () => {
+    mockGet.mockImplementation((key: string) => (key === 'selected' ? 'ETH.ETH' : null));
+    render(<PoolList pools={mockPools} />);
+    const links = screen.getAllByRole('link');
+    const ethLink = links.find((l) => l.getAttribute('href') === '/dashboard?selected=ETH.ETH');
+    expect(ethLink).toHaveClass('bg-muted');
+    const btcLink = links.find((l) => l.getAttribute('href') === '/dashboard?selected=BTC.BTC');
+    expect(btcLink).not.toHaveClass('bg-muted');
   });
 
   it('renders in order (same as props)', () => {
