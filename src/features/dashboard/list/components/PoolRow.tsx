@@ -11,8 +11,9 @@ export function PoolRow({ pool, isSelected }: Props) {
     <li>
       <Link
         href={`/dashboard/${pool.assetRaw}`}
-        className={`flex items-center justify-between gap-4 py-3 px-2 rounded-md transition-colors hover:bg-muted/50 ${isSelected ? 'bg-muted' : ''
-          }`}
+        className={`flex items-center justify-between gap-4 py-3 px-2 rounded-md transition-colors hover:bg-muted/50 ${
+          isSelected ? 'bg-muted' : ''
+        }`}
       >
         <span className="text-sm font-medium">
           {pool.asset} <span className="text-muted-foreground font-normal">(on {pool.chain})</span>

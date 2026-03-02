@@ -49,14 +49,17 @@ export default async function DashboardDetails({ params }: Props) {
                   </tr>
                 </thead>
                 <tbody>
-                  {data.intervals.slice(-10).reverse().map((interval, i) => (
-                    <tr key={i} className="border-t border-border">
-                      <td className="p-2">{formatTimestamp(interval.endTime)}</td>
-                      <td className="p-2 text-right">{interval.assetDepth}</td>
-                      <td className="p-2 text-right">{interval.runeDepth}</td>
-                      <td className="p-2 text-right">{interval.assetPriceUSD}</td>
-                    </tr>
-                  ))}
+                  {data.intervals
+                    .slice(-10)
+                    .reverse()
+                    .map((interval, i) => (
+                      <tr key={i} className="border-t border-border">
+                        <td className="p-2">{formatTimestamp(interval.endTime)}</td>
+                        <td className="p-2 text-right">{interval.assetDepth}</td>
+                        <td className="p-2 text-right">{interval.runeDepth}</td>
+                        <td className="p-2 text-right">{interval.assetPriceUSD}</td>
+                      </tr>
+                    ))}
                 </tbody>
               </table>
             </div>

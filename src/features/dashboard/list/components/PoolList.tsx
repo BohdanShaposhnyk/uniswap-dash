@@ -14,11 +14,7 @@ export function PoolList({ pools }: { pools: MidgardPool[] }) {
   return (
     <ul className="divide-y divide-border rounded-md border border-border">
       {pools.map((pool) => (
-        <PoolRow
-          key={pool.assetRaw}
-          pool={pool}
-          isSelected={pool.assetRaw === selected}
-        />
+        <PoolRow key={pool.assetRaw} pool={pool} isSelected={pool.assetRaw === selected} />
       ))}
     </ul>
   );
