@@ -4,10 +4,12 @@ import { PoolList } from '@/features/dashboard/list/components/PoolList';
 import type { MidgardPool } from '@/lib/rest/public/thorchain/midgard/queries/pools/schema.response';
 
 const mockGet = vi.fn();
+const mockPathname = vi.fn(() => '/dashboard');
 vi.mock('next/navigation', () => ({
   useSearchParams: () => ({
     get: mockGet,
   }),
+  usePathname: () => mockPathname(),
 }));
 
 const mockPools: MidgardPool[] = [
@@ -40,6 +42,7 @@ const mockPools: MidgardPool[] = [
 describe('PoolList', () => {
   beforeEach(() => {
     mockGet.mockReturnValue(null);
+    mockPathname.mockReturnValue('/dashboard');
   });
 
   it('renders asset, price and volume for each pool', () => {
@@ -56,17 +59,17 @@ describe('PoolList', () => {
     render(<PoolList pools={mockPools} />);
     const btcLink = screen.getByRole('link', { name: /BTC/ });
     const ethLink = screen.getByRole('link', { name: /ETH/ });
-    expect(btcLink).toHaveAttribute('href', '/dashboard?selected=BTC.BTC');
-    expect(ethLink).toHaveAttribute('href', '/dashboard?selected=ETH.ETH');
+    expect(btcLink).toHaveAttribute('href', '/dashboard/BTC.BTC');
+    expect(ethLink).toHaveAttribute('href', '/dashboard/ETH.ETH');
   });
 
   it('highlights selected pool when searchParams.selected matches assetRaw', () => {
-    mockGet.mockImplementation((key: string) => (key === 'selected' ? 'ETH.ETH' : null));
+    mockPathname.mockReturnValue('/dashboard/ETH.ETH');
     render(<PoolList pools={mockPools} />);
     const links = screen.getAllByRole('link');
-    const ethLink = links.find((l) => l.getAttribute('href') === '/dashboard?selected=ETH.ETH');
+    const ethLink = links.find((l) => l.getAttribute('href') === '/dashboard/ETH.ETH');
     expect(ethLink).toHaveClass('bg-muted');
-    const btcLink = links.find((l) => l.getAttribute('href') === '/dashboard?selected=BTC.BTC');
+    const btcLink = links.find((l) => l.getAttribute('href') === '/dashboard/BTC.BTC');
     expect(btcLink).not.toHaveClass('bg-muted');
   });
 
