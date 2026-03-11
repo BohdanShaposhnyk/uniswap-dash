@@ -1,5 +1,4 @@
 export default function DashboardLayout({
-  children: _children,
   list,
   details,
   transactions,
