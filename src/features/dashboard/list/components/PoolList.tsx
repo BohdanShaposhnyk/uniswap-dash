@@ -12,7 +12,7 @@ export function PoolList({ pools }: { pools: MidgardPool[] }) {
     return <p className="text-muted-foreground py-8 text-center">No pools</p>;
   }
   return (
-    <ul className="divide-y divide-border rounded-md border border-border">
+    <ul className="divide-y divide-border rounded-md border border-border overflow-y-auto min-h-0">
       {pools.map((pool) => (
         <PoolRow key={pool.assetRaw} pool={pool} isSelected={pool.assetRaw === selected} />
       ))}

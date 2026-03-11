@@ -23,7 +23,7 @@ export function Navbar() {
       className="border-border bg-background sticky top-0 z-10 border-b"
       aria-label="Main navigation"
     >
-      <div className="container mx-auto flex h-14 items-center gap-6 px-4">
+      <div className="container mx-auto flex h-[var(--navbar-h)] items-center gap-6 px-4">
         {NAV_ITEMS.map(({ href, label }) => {
           const isActive = href === '/' ? pathname === '/' : pathname.startsWith(href);
           return (

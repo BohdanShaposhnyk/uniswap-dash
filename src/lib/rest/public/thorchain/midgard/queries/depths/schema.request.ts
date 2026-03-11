@@ -1,7 +1,8 @@
 import { z } from 'zod';
 
-const INTERVAL_VALUES = ['5min', 'hour', 'day', 'week', 'month', 'quarter', 'year'] as const;
+export const INTERVAL_VALUES = ['5min', 'hour', 'day', 'week', 'month', 'quarter', 'year'] as const;
 
+export type Interval = (typeof INTERVAL_VALUES)[number];
 const queryParamsSchema = z.object({
   interval: z.enum(INTERVAL_VALUES).optional(),
   count: z
