@@ -6,6 +6,7 @@ import * as Sentry from '@sentry/nextjs';
 
 Sentry.init({
   dsn: 'https://6ddcd5d1ceb3c891b5a6eff9b3f46e6d@o4510975073517568.ingest.de.sentry.io/4510975082627152',
+  ignoreErrors: ['ParallelRouteDefault'],
 
   // Define how likely traces are sampled. Adjust this value in production, or use tracesSampler for greater control.
   tracesSampleRate: 1,

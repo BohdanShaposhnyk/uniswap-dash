@@ -4,18 +4,18 @@ import { TimestampSchema } from '@/lib/schemas';
 const DepthsMetaSchema = z.object({
   startTime: TimestampSchema,
   endTime: TimestampSchema,
-  priceShiftLoss: z.string().optional(),
-  luviIncrease: z.string().optional(),
+  priceShiftLoss: z.string(),
+  luviIncrease: z.string(),
   startAssetDepth: z.string(),
   startRuneDepth: z.string(),
-  startLPUnits: z.string().optional(),
-  startMemberCount: z.string().optional(),
-  startSynthUnits: z.string().optional(),
+  startLPUnits: z.string(),
+  startMemberCount: z.string(),
+  startSynthUnits: z.string(),
   endAssetDepth: z.string(),
   endRuneDepth: z.string(),
-  endLPUnits: z.string().optional(),
-  endMemberCount: z.string().optional(),
-  endSynthUnits: z.string().optional(),
+  endLPUnits: z.string(),
+  endMemberCount: z.string(),
+  endSynthUnits: z.string(),
 });
 
 const DepthsIntervalSchema = z.object({
@@ -25,21 +25,21 @@ const DepthsIntervalSchema = z.object({
   runeDepth: z.string(),
   assetPrice: z.string(),
   assetPriceUSD: z.string(),
-  openPriceUSD: z.string().optional(),
-  highPriceUSD: z.string().optional(),
-  lowPriceUSD: z.string().optional(),
-  closePriceUSD: z.string().optional(),
-  liquidityUnits: z.string().optional(),
-  membersCount: z.string().optional(),
-  synthUnits: z.string().optional(),
-  synthSupply: z.string().optional(),
-  units: z.string().optional(),
-  luvi: z.string().optional(),
+  openPriceUSD: z.string(),
+  highPriceUSD: z.string(),
+  lowPriceUSD: z.string(),
+  closePriceUSD: z.string(),
+  liquidityUnits: z.string(),
+  membersCount: z.string(),
+  synthUnits: z.string(),
+  synthSupply: z.string(),
+  units: z.string(),
+  luvi: z.string(),
 });
 
 const DepthsResponseSchema = z.object({
-  meta: DepthsMetaSchema.optional(),
-  intervals: z.array(DepthsIntervalSchema).optional(),
+  meta: DepthsMetaSchema,
+  intervals: z.array(DepthsIntervalSchema),
 });
 
 export type DepthsMeta = z.infer<typeof DepthsMetaSchema>;
